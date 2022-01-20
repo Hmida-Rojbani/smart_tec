@@ -8,12 +8,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import tn.com.smarteck.project.dto.ClientDTORes;
 import tn.com.smarteck.project.entities.MetEntity;
 import tn.com.smarteck.project.entities.PlatEntity;
 import tn.com.smarteck.project.entities.TicketEntity;
+import tn.com.smarteck.project.repositories.ClientRepository;
 import tn.com.smarteck.project.repositories.TicketRepository;
 
 @Service
@@ -21,6 +24,8 @@ import tn.com.smarteck.project.repositories.TicketRepository;
 public class StatService {
 	
 	private TicketRepository ticketRepository;
+	private ClientRepository clientRepository;
+	private ModelMapper mapper;
 	
 	public String platPlusAchtee(LocalDate begin, LocalDate end) {
 		MetEntity metRes = ticketRepository.findAll()
@@ -51,6 +56,13 @@ public class StatService {
 		 * return name;
 		 */
 		
+	}
+	
+	public ClientDTORes fideleClient() {
+		return mapper.map(clientRepository.findAll()
+				.stream()
+				.max(Comparator.comparing(c->c.getTickets().size()))
+				.orElseThrow(()->new NoSuchElementException("No Clients in DB")),ClientDTORes.class);
 	}
 
 }

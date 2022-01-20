@@ -1,4 +1,4 @@
-package tn.com.smarteck.project.controllers;
+package tn.com.smarteck.project.rest.controllers;
 
 import java.util.NoSuchElementException;
 

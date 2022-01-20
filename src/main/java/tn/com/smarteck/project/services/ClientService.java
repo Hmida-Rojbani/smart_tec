@@ -33,6 +33,10 @@ public class ClientService {
 		.orElseThrow(()->new NoSuchElementException("Client Id not found"));
 	}
 	
+	public List<ClientEntity> getAllClients(){
+		return clientRepository.findAll();
+	}
+	
 	public List<ClientEntity> getByDOB(LocalDate date){
 		return clientRepository.findAll()
 				.stream()

@@ -1,4 +1,4 @@
-package tn.com.smarteck.project.controllers;
+package tn.com.smarteck.project.rest.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
