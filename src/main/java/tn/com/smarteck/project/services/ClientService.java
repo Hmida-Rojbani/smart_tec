@@ -33,6 +33,11 @@ public class ClientService {
 		.orElseThrow(()->new NoSuchElementException("Client Id not found"));
 	}
 	
+	public ClientDTOReq getClientById(int id) {
+		return mapper.map(clientRepository.findById(id)
+		.orElseThrow(()->new NoSuchElementException("Client Id not found")),ClientDTOReq.class);
+	}
+	
 	public List<ClientEntity> getAllClients(){
 		return clientRepository.findAll();
 	}
