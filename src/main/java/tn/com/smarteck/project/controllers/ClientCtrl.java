@@ -1,7 +1,10 @@
 package tn.com.smarteck.project.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,8 +38,10 @@ public class ClientCtrl {
 	}
 	
 	@PostMapping("/add/client")
-	public String postAddClient(@ModelAttribute("client") ClientDTOReq req,
+	public String postAddClient(@Valid @ModelAttribute("client") ClientDTOReq req, BindingResult result,
 			@ModelAttribute("updateble") String updateble) {
+		if(result.hasErrors())
+			return "clients/add-client";
 		System.out.println(updateble);
 		if(Boolean.valueOf(updateble))
 			clientService.updateClient(req.getId(), req);

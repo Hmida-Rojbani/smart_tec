@@ -1,6 +1,9 @@
 package tn.com.smarteck.project.rest.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -27,8 +30,9 @@ public class ClientRestCtrl {
 	private ClientService clientService;
 	
 	//@RequestMapping(path="/save",method = RequestMethod.POST)
-	@PostMapping("/save")
-	public ClientDTORes save(@RequestBody ClientDTOReq client) {
+	@PostMapping(path = "/save", consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE},
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ClientDTORes save(@Valid @RequestBody ClientDTOReq client) {
 		return clientService.addClient(client);
 	}
 	

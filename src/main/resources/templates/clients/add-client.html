@@ -72,6 +72,7 @@
   <div class="form-outline mb-4">
           <input th:field="*{name}" type="text" id="form3Example1" class="form-control" />
         <label class="form-label" for="form3Example1">Name</label>
+	<p th:if="${#fields.hasErrors('name')}"  th:errors="*{name}" />
 	</div>
   <!-- Email input -->
   <div class="form-outline mb-4">
